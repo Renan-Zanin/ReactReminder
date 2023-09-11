@@ -15,6 +15,7 @@ type Note = {
 type NoteContextType = {
   notes: Note[];
   addNote: (title: string, description: string) => void;
+  deleteNote: (index: number) => void;
 };
 
 const NoteContext = createContext<NoteContextType | undefined>(undefined);
@@ -32,7 +33,7 @@ type NoteProviderProps = {
 };
 
 export const NoteProvider = ({ children }: NoteProviderProps) => {
-  const [notes, setNotes] = useState<Note[]>([]);
+  const [notes, setNotes] = useState<Note[]>([] as Note[]);
 
   useEffect(() => {
     const storedNotes = JSON.parse(
@@ -41,16 +42,20 @@ export const NoteProvider = ({ children }: NoteProviderProps) => {
     setNotes(storedNotes);
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("notes", JSON.stringify(notes));
-  }, [notes]);
-
   const addNote = (title: string, description: string) => {
     setNotes([...notes, { title, description }]);
   };
 
+  const deleteNote = (index: number) => {
+    const updatedNotes = [...notes];
+    updatedNotes.splice(index, 1);
+    setNotes(updatedNotes);
+
+    localStorage.setItem("notes", JSON.stringify(updatedNotes));
+  };
+
   return (
-    <NoteContext.Provider value={{ notes, addNote }}>
+    <NoteContext.Provider value={{ notes, addNote, deleteNote }}>
       {children}
     </NoteContext.Provider>
   );

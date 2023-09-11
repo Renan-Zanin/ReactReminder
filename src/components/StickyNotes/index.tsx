@@ -4,7 +4,7 @@ import { Container, Grid } from "./styles";
 import { NotesProps } from "../../App";
 
 export function StickyNotes() {
-  const { notes } = useNoteContext();
+  const { notes, deleteNote } = useNoteContext();
 
   return (
     <Container>
@@ -13,10 +13,11 @@ export function StickyNotes() {
       </div>
       <Grid>
         <For each={notes} as="div">
-          {(notes: NotesProps) => (
+          {(notes: NotesProps, index: number) => (
             <div key={notes.title}>
               <h2>{notes.title}</h2>
               <p>{notes.description}</p>
+              <button onClick={() => deleteNote(index)}>deletar</button>
             </div>
           )}
         </For>

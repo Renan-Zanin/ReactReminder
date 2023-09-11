@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import Modal from "react-modal";
 import { useNoteContext } from "../../hooks/notesContext";
 import { Button } from "../Button";
@@ -14,16 +14,11 @@ Modal.setAppElement("#root");
 export function NewStickyModal({ isOpen, onRequestClose }: ModalProps) {
   const [stickyName, setStickyName] = useState("");
   const [stickyDescription, setStickyDescription] = useState("");
-  const { addNote } = useNoteContext();
+  const { addNote, notes } = useNoteContext();
 
-  const formData = {
-    title: stickyName,
-    description: stickyDescription,
-  };
-
-  function handleFormSubmit(event: any) {
+  function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    event.target.reset();
+    localStorage.setItem("notes", JSON.stringify(notes));
     onRequestClose();
   }
 
@@ -33,7 +28,7 @@ export function NewStickyModal({ isOpen, onRequestClose }: ModalProps) {
       onRequestClose={onRequestClose}
       shouldCloseOnEsc
       className="react-modal-content"
-      style={{ overlay: { background: "rgba(0,0,0,0.409)" } }}
+      style={{ overlay: { background: "rgba(0,0,0,0.6)" } }}
     >
       <Container onSubmit={handleFormSubmit}>
         <h1>Criar Lembrete</h1>
