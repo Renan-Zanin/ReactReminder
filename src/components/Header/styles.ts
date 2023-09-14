@@ -10,7 +10,19 @@ export const Container = styled.header`
 
   padding: 0 4rem;
 
-  background-color: var(--purple-900);
+  background-color: ${(props) => props.theme.colors.primaryColor};
+
+  > div {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+
+    > div {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+  }
 
   > img {
     height: 2.5rem;

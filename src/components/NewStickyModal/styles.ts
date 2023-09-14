@@ -14,10 +14,11 @@ export const Container = styled.form`
   position: absolute;
   top: 50%;
   left: 50%;
+  z-index: 1000;
 
   transform: translate(-50%, -50%);
 
-  background-color: var(--font-white);
+  background-color: ${(props) => props.theme.colors.primaryColor};
   border-radius: 8px;
 
   > div {
@@ -34,7 +35,7 @@ export const Container = styled.form`
     > input,
     textarea {
       width: 100%;
-      border: 1px solid #7c7c7c;
+      border: 1px solid ${(props) => props.theme.colors.border};
       border-radius: 0.5rem;
       padding: 0.4rem;
     }
@@ -49,7 +50,7 @@ export const Container = styled.form`
   }
 
   > h1 {
-    color: var(--purple-900);
+    color: ${(props) => props.theme.colors.secondaryColor};
     font-family: "Roboto";
     margin-bottom: 2rem;
   }

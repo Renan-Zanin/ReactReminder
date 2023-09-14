@@ -4,15 +4,15 @@ export const Container = styled.button`
   display: flex;
   padding: 0.7rem 1.5rem;
 
-  background-color: var(--purple-600);
-  color: var(--font-white);
+  background-color: ${(props) => props.theme.colors.secondaryColor};
+  color: ${(props) => props.theme.colors.backgroundColor};
 
   font-family: "Roboto";
 
-  border: none;
+  border: 1px solid ${(props) => props.theme.colors.secondaryColor};
   border-radius: 0.2rem;
 
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
     cursor: pointer;
